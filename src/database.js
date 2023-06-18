@@ -56,4 +56,16 @@ export class Database {
       this.#persist;
     }
   }
+
+  delete(table, id) {
+    const row = this.#database[table].find((row) => row.id === id);
+
+    if (row) {
+      const filteredDatabase = this.#database[table].filter(
+        (row) => row.id !== id
+      );
+      this.#database = filteredDatabase;
+      this.#persist();
+    }
+  }
 }
