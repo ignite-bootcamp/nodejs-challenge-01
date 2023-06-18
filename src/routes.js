@@ -28,7 +28,19 @@ export const routes = [
     method: "GET",
     path: "/tasks",
     handler: (req, res) => {
-      console.log(req.body);
+      const { search } = req.query;
+
+      const tasks = database.select(
+        "tasks",
+        search
+          ? {
+              name: search,
+              description: search,
+            }
+          : null
+      );
+
+      return res.end(JSON.stringify(tasks));
     },
   },
 ];
