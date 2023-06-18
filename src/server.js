@@ -1,13 +1,18 @@
 import http from "http";
-import { Database } from "./database.js";
+import { routes } from "./routes.js";
 
 const PORT = 3000;
 
-const database = new Database();
-
 const requestListener = (req, res) => {
-  console.log(req.method);
-  res.end("Hello World");
+  const route = routes.find((route) => {
+    return route.method === req.method && route.path === req.url;
+  });
+
+  if (route) {
+    return route.handler(req, res);
+  }
+
+  return res.writeHead(404).end();
 };
 
 const server = http.createServer(requestListener);
