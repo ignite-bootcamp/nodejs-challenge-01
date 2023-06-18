@@ -7,7 +7,7 @@ const database = new Database();
 export const routes = [
   {
     method: "POST",
-    path: "/tasks",
+    path: buildRoutePath("/tasks"),
     handler: (req, res) => {
       const { body } = req;
 
@@ -42,6 +42,21 @@ export const routes = [
       );
 
       return res.end(JSON.stringify(tasks));
+    },
+  },
+  {
+    method: "PUT",
+    path: buildRoutePath("/tasks/:id"),
+    handler: (req, res) => {
+      const { id } = req.params;
+      const { title, description } = req.body;
+
+      database.update("tasks", id, {
+        title,
+        description,
+      });
+
+      res.writeHead(204).end();
     },
   },
 ];
