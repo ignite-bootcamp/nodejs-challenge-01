@@ -30,7 +30,7 @@ export class Database {
   }
 
   select(table, search) {
-    const data = this.#database[table] ?? [];
+    let data = this.#database[table] ?? [];
 
     if (search) {
       data = data.filter((row) => {
