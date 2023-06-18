@@ -53,7 +53,7 @@ export class Database {
         ...data,
         updated_at: new Date().toISOString(),
       };
-      this.#persist;
+      this.#persist();
     }
   }
 
