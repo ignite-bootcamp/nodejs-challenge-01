@@ -1,6 +1,10 @@
 <h1 align='center'>nodejs-challenge-01</h1>
 <p align='center'>A simple CRUD with import-from-file (XLSX) functionality built without frameworks to understand Node.js streams.</p>
 
+<div align="center">
+ <a href="https://insomnia.rest/run/?label=nodejs-challenge-01&uri=https%3A%2F%2Fgithub.com%2Fignite-bootcamp%2Fnodejs-challenge-01%2Fblob%2Fmain%2Finsomnia.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
+</div>
+
 ## 🛠 Technologies
 
 This project was developed with the following technologies:
