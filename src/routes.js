@@ -1,6 +1,8 @@
+import reader from "xlsx";
 import { randomUUID } from "node:crypto";
 import { Database } from "./database.js";
 import { buildRoutePath } from "./utils/build-route-path.js";
+import { formatXlsx } from "./utils/formatXlsx.js";
 
 const database = new Database();
 
@@ -21,6 +23,27 @@ export const routes = [
       };
 
       database.insert("tasks", newTask);
+
+      return res.writeHead(201).end();
+    },
+  },
+  {
+    method: "POST",
+    path: buildRoutePath("/tasks/import"),
+    handler: async (req, res) => {
+      const data = await formatXlsx(req);
+
+      data.forEach((task) => {
+        const newTask = {
+          id: randomUUID(),
+          title: task.title,
+          description: task.description,
+          created_at: new Date().toISOString(),
+          completed_at: null,
+          updated_at: new Date().toISOString(),
+        };
+        database.insert("tasks", newTask);
+      });
 
       return res.writeHead(201).end();
     },

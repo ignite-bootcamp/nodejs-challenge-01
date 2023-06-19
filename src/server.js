@@ -6,7 +6,9 @@ import { extractQueryParams } from "./utils/extract-query.js";
 const PORT = 3000;
 
 const requestListener = async (req, res) => {
-  await json(req, res);
+  if (req.headers["content-type"] === "application/json") {
+    await json(req, res);
+  }
 
   const route = routes.find((route) => {
     return route.method === req.method && route.path.test(req.url);
